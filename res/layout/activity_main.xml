@@ -2,38 +2,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ff369eed"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.nullscreen.MainActivity" >
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:src="@drawable/abc_ab_share_pack_holo_dark" />
+    tools:context="com.example.nullscreen.MainActivity"
+    android:orientation="horizontal" 
+    >
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:ems="10" >
+        android:layout_above="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="   input ip address"
+        android:textAlignment="center" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:text="SEE THE PRESENTATION"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/header"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:text="IN  YOUR  SMARTPHONE"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/header"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_toRightOf="@+id/editText1"
-        android:text="IP" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="105dp"
+        android:text="CONNENT TO SERVER"
+         />
 
 </RelativeLayout>

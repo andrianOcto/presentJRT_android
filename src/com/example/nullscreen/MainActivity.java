@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
         
         //event listener button
         button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        	public void onClick(View v) {
             	EditText mEdit   = (EditText)findViewById(R.id.editText1);
                 IP = mEdit.getText().toString();
                 if(IP.equals(""))
@@ -68,12 +68,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    //@Override
+    //public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+        //getMenuInflater().inflate(R.menu.main, menu);
+        //return true;
+    //}
     
     
     
