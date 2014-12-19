@@ -14,6 +14,7 @@ import java.net.UnknownHostException;
 
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -41,39 +42,25 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final Button button = (Button) findViewById(R.id.button1);
+        setContentView(R.layout.preview);
+    	//menjalankan thread
         
-        //event listener button
-        button.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-            	EditText mEdit   = (EditText)findViewById(R.id.editText1);
-                IP = mEdit.getText().toString();
-                if(IP.equals(""))
-                {
-                	Toast toast = Toast.makeText(getApplicationContext(), "IP masih kosong", Toast.LENGTH_SHORT);
-                }
-                else
-                {
-                	//menjalankan thread
-                	new Thread(new ClientThread()).start();
-                	runnable=true;
-
-                }
-            }
-        });
+        Intent i=getIntent();
+        IP=i.getExtras().getString("IP");
+    	new Thread(new ClientThread()).start();
+    	runnable=true;
         imageView = (ImageView) findViewById(R.id.imageView1);
 
         
     }
 
 
-    //@Override
-    //public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-        //return true;
-    //}
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
     
     
     
@@ -132,6 +119,7 @@ public class MainActivity extends ActionBarActivity {
             try {
             	while(runnable)
             	{
+            		Log.d("test", "masuk "+IP);
             		Socket s = new Socket(IP, 10888);
             		dis = new DataInputStream(
                             s.getInputStream());

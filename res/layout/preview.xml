@@ -9,8 +9,7 @@
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/editText1"
-        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
         android:src="@drawable/abc_ab_share_pack_holo_dark" />
 
 </LinearLayout>
