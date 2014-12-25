@@ -51,7 +51,6 @@ public class MainActivity extends ActionBarActivity {
     	runnable=true;
         imageView = (ImageView) findViewById(R.id.imageView1);
 
-        
     }
 
 
@@ -63,35 +62,20 @@ public class MainActivity extends ActionBarActivity {
     }
     
     
-    
-    @Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		try {
-			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
     @Override
     public void onPause() {
         super.onPause();  // Always call the superclass method first
         runnable=false;
-    }
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		try {
-			if(socket.isConnected())
+        try
+		{
+		if(socket.isConnected())
 			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+
 	
 	@Override
 	public void onResume() {
@@ -111,7 +95,22 @@ public class MainActivity extends ActionBarActivity {
     }
 
 	
-    class ClientThread implements Runnable {
+    @Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		try
+		{
+		if(socket.isConnected())
+			socket.close();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+
+	class ClientThread implements Runnable {
     	 
         @Override
         public void run() {
@@ -119,7 +118,6 @@ public class MainActivity extends ActionBarActivity {
             try {
             	while(runnable)
             	{
-            		Log.d("test", "masuk "+IP);
             		Socket s = new Socket(IP, 10888);
             		dis = new DataInputStream(
                             s.getInputStream());
@@ -130,20 +128,8 @@ public class MainActivity extends ActionBarActivity {
             	    }
             		fos.flush();
             		
-            		
-            		
-//            		Log.d("thread","jalan");
-//            		socket = new Socket(IP, 10888);
-//				   dataInputStream = new DataInputStream(socket.getInputStream());
-//				   // dataOutputStream.writeUTF(textOut.getText().toString());
-//				   final String base64Code = dataInputStream.readUTF();
-//
-//				   Log.d("String", ":" + base64Code);
-//
-				   //Thread update UI
 				   runOnUiThread(new Runnable(){
 				        public void run() {
-				        	Log.d("update Image", "update image");
 				        	data=fos.toByteArray();
 				        	Bitmap bitmap = BitmapFactory.decodeByteArray(data,0,data.length);
 				        	

@@ -1,8 +1,13 @@
 package com.example.nullscreen;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.example.nullscreen.MainActivity.ClientThread;
 
+import android.net.*;
 import android.support.v7.app.ActionBarActivity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +18,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class PreviewActivity extends ActionBarActivity {
+    private Pattern pattern;
+    private Matcher matcher;
+ 
+    private static final String IPADDRESS_PATTERN = 
+		"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +35,25 @@ public class PreviewActivity extends ActionBarActivity {
 		final Button button = (Button) findViewById(R.id.button1);
 		final Intent i=new Intent(this,MainActivity.class);
         //event listener button
+		pattern = Pattern.compile(IPADDRESS_PATTERN);
+		
         button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        	
+      	  
+            @SuppressLint("NewApi")
+			public void onClick(View v) {
             	String IP;
             	EditText mEdit   = (EditText)findViewById(R.id.editText1);
+
                 IP = mEdit.getText().toString();
-                if(IP.equals(""))
+            	matcher = pattern.matcher(IP);
+                if(IP.equals("") || IP.isEmpty())
                 {
-                	Toast toast = Toast.makeText(getApplicationContext(), "IP masih kosong", Toast.LENGTH_SHORT);
+                	Toast.makeText(getApplicationContext(), "IP address is empty, please fill it first", Toast.LENGTH_SHORT).show();
+                }
+                else if(!matcher.matches())
+                {
+                	Toast.makeText(getApplicationContext(), "IP address is not vadlid", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
